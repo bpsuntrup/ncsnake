@@ -1,3 +1,4 @@
+"""ncurses snake game written functionally"""
 from enum import Enum, IntEnum
 import shutil
 import time
@@ -36,20 +37,28 @@ def advance(snake, direction, food):
 def check_snake(snake, direction, boundary):
     ''' Returns true if snake may proceed in given direction without eating
     itself or falling off the world, False otherwise'''
-    return \
-    not apply(
+    return not apply(
         lambda x: x in snake or x in boundary,
         tuple(map(add, snake[0], direction.value)))
 
 def undraw(window, container):
     """Undraws everything in container"""
 
-def draw_snake(nc, window, snake):
+def draw_snake(nc, window, snake, color=4):
     """Draws everything blue in window in container. Containert must be a 
     list"""
-    print("DUUUUDE")
-    starmap(window.addstr, apply(partial(zip, *unzip(iter(snake))), constantly(' '), constantly(nc.color_pair(4))))
-    window.refresh()
+    # list(starmap(window.addstr,
+        # apply(partial(zip, *unzip(iter(snake))),
+            # constantly(' '),
+            # constantly(nc.color_pair(color)))))
+    list(map(window.addstr,
+            *unzip(iter(snake)),
+            constantly(' '),
+            constantly(nc.color_pair(color))))
+    # window.refresh()
+
+def draw_border(nc, win, height, width):
+    list(starmap(window.addstr, i))
 
     
 if __name__ == '__main__':
@@ -80,5 +89,5 @@ if __name__ == '__main__':
         draw_snake(nc, win, snake)
         win.refresh()
         time.sleep(2)
-        win.addstr(4,20,'GO', nc.color_pair(2))
+        win.addstr(4, 20, 'GO', nc.color_pair(2))
         win.refresh()
