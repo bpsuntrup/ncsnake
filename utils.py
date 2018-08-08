@@ -1,6 +1,14 @@
 #!/usr/bin/python
 import curses
 
+def constantly(x):
+    while True:
+        yield x
+
+def unzip(it):
+    ''' inverse of zip(). Uses iterator '''
+    return (x for x, y in it), (y for x, y in it)
+
 def apply(f, *args):
     return f(*args)
 
